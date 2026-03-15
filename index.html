@@ -236,8 +236,9 @@
 </audio>
             <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
                 <div class="relative group cursor-pointer">
-                    <div
-                        class="w-64 h-64 rounded-full border-8 border-accent-dark bg-zinc-900 flex items-center justify-center overflow-hidden animate-[spin_10s_linear_infinite]">
+                    <div id="vinyl"
+                        class="w-64 h-64 rounded-full border-8 border-accent-dark bg-zinc-900 flex items-center justify-center overflow-hidden animate-[spin_10s_linear_infinite]"
+                        style="animation-play-state: paused;"></div>
                         <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
                             <div class="w-4 h-4 rounded-full bg-primary"></div>
                         </div>
@@ -266,8 +267,8 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-2 pr-2">
-                            <div class="w-24 h-1 bg-accent-dark rounded-full overflow-hidden">
-                                <div id="progressBar" class="h-full bg-primary" style="width:0%"></div>
+                            <div id="progressContainer" class="w-24 h-1 bg-accent-dark rounded-full overflow-hidden cursor-pointer">
+                                 <div id="progressBar" class="h-full bg-primary" style="width:0%"></div>
                             </div>
                             <span id="audioTime" class="text-[10px] text-slate-500">0:00</span>
                         </div>
@@ -402,9 +403,25 @@ const audio = document.getElementById("rockAudio");
 const playButton = document.getElementById("playButton");
 const playIcon = document.getElementById("playIcon");
 const progressBar = document.getElementById("progressBar");
+const progressContainer = document.getElementById("progressContainer");
 const audioTime = document.getElementById("audioTime");
+const vinyl = document.getElementById("vinyl");
 
 playButton.addEventListener("click", () => {
+
+if(audio.paused){
+audio.play();
+playIcon.textContent="pause";
+vinyl.style.animationPlayState = "running";
+}
+
+else{
+audio.pause();
+playIcon.textContent="play_arrow";
+vinyl.style.animationPlayState = "paused";
+}
+
+});
 
 if(audio.paused){
 audio.play();
@@ -431,6 +448,17 @@ seconds = "0" + seconds;
 }
 
 audioTime.textContent = minutes + ":" + seconds;
+
+});
+
+progressContainer.addEventListener("click", (e) => {
+
+const width = progressContainer.clientWidth;
+const clickX = e.offsetX;
+
+const duration = audio.duration;
+
+audio.currentTime = (clickX / width) * duration;
 
 });
 
