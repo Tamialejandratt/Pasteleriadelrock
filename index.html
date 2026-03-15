@@ -232,6 +232,9 @@
         </section>
         <!-- Music / Player Section -->
         <section class="py-20 px-6 bg-primary/5 border-y border-primary/20" id="music">
+            <audio id="rockAudio">
+    <source src="https://raw.githubusercontent.com/Tamialejandratt/pasteleriadelrock/main/trailer_pasteleria_del_rock.mp3" type="audio/mpeg">
+</audio>
             <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
                 <div class="relative group cursor-pointer">
                     <div
@@ -255,8 +258,8 @@
                     <div
                         class="bg-background-dark p-4 rounded-xl border border-accent-dark flex items-center justify-between gap-6">
                         <div class="flex items-center gap-4">
-                            <button class="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-                                <span class="material-symbols-outlined text-white">pause</span>
+                            <button id="playButton" class="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
+                                <span id="playIcon" class="material-symbols-outlined text-white">play_arrow</span>
                             </button>
                             <div>
                                 <p class="text-sm font-bold truncate">Estado actual: Velvet Revolver</p>
@@ -394,6 +397,25 @@
             </div>
         </div>
     </footer>
+    <script>
+const audio = document.getElementById("rockAudio");
+const playButton = document.getElementById("playButton");
+const playIcon = document.getElementById("playIcon");
+
+playButton.addEventListener("click", () => {
+
+if(audio.paused){
+audio.play();
+playIcon.textContent="pause";
+}
+
+else{
+audio.pause();
+playIcon.textContent="play_arrow";
+}
+
+});
+</script>
 </body>
 
 </html>
