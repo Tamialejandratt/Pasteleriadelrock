@@ -238,7 +238,7 @@
                 <div class="relative group cursor-pointer">
                     <div id="vinyl"
                         class="w-64 h-64 rounded-full border-8 border-accent-dark bg-zinc-900 flex items-center justify-center overflow-hidden animate-[spin_10s_linear_infinite]"
-                        style="animation-play-state: paused;"></div>
+                        style="animation-play-state: paused;"> 
                         <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
                             <div class="w-4 h-4 rounded-full bg-primary"></div>
                         </div>
@@ -423,18 +423,6 @@ vinyl.style.animationPlayState = "paused";
 
 });
 
-if(audio.paused){
-audio.play();
-playIcon.textContent="pause";
-}
-
-else{
-audio.pause();
-playIcon.textContent="play_arrow";
-}
-
-});
-
 audio.addEventListener("timeupdate", () => {
 
 const progress = (audio.currentTime / audio.duration) * 100;
@@ -455,7 +443,6 @@ progressContainer.addEventListener("click", (e) => {
 
 const width = progressContainer.clientWidth;
 const clickX = e.offsetX;
-
 const duration = audio.duration;
 
 audio.currentTime = (clickX / width) * duration;
