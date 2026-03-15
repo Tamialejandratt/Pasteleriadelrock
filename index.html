@@ -436,8 +436,13 @@ seconds = "0" + seconds;
 }
 
 audioTime.textContent = minutes + ":" + seconds;
-
 });
+
+audio.addEventListener("ended", () => {
+playIcon.textContent = "play_arrow";
+vinyl.style.animationPlayState = "paused";
+});
+
 
 progressContainer.addEventListener("click", (e) => {
 
